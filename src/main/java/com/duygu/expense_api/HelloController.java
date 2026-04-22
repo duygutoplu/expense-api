@@ -10,4 +10,12 @@ public class HelloController {
     public String hello() {
         return "Hello Duygu";
     }
+
+    @GetMapping("/expense")
+    public Expense getExpense() {
+        Expense e = new Expense();
+        e.title = "Coffee";
+        e.amount = 50;
+        return e;
+    }
 }
