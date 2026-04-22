@@ -18,6 +18,7 @@ public class HelloController {
     @GetMapping("/expense")
     public Expense getExpense() {
         Expense e = new Expense();
+        e.id = 1;
         e.title = "Coffee";
         e.amount = 50;
         return e;
@@ -28,10 +29,12 @@ public class HelloController {
         List<Expense> list = new ArrayList<>();
 
         Expense e1 = new Expense();
+        e1.id = 1;
         e1.title = "Coffee";
         e1.amount = 50;
 
         Expense e2 = new Expense();
+        e2.id = 2;
         e2.title = "Taxi";
         e2.amount = 120;
 
