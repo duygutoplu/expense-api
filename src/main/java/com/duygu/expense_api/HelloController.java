@@ -1,3 +1,4 @@
+
 package com.duygu.expense_api;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
+
+    private int nextId = 3;
 
     @GetMapping("/hello")
     public String hello() {
@@ -46,6 +49,8 @@ public class HelloController {
 
     @PostMapping("/expense")
     public Expense createExpense(@RequestBody Expense expense) {
+        expense.id = nextId;
+        nextId = nextId + 1;
         return expense;
     }
 }
