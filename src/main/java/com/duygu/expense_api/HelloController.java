@@ -1,4 +1,3 @@
-
 package com.duygu.expense_api;
 
 import java.util.List;
@@ -12,25 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     private int nextId = 3;
+    private List<Expense> expenses = new ArrayList<>();
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello Duygu";
-    }
-
-    @GetMapping("/expense")
-    public Expense getExpense() {
-        Expense e = new Expense();
-        e.id = 1;
-        e.title = "Coffee";
-        e.amount = 50;
-        return e;
-    }
-
-    @GetMapping("/expenses")
-    public List<Expense> getExpenses() {
-        List<Expense> list = new ArrayList<>();
-
+    public HelloController() {
         Expense e1 = new Expense();
         e1.id = 1;
         e1.title = "Coffee";
@@ -41,16 +24,30 @@ public class HelloController {
         e2.title = "Taxi";
         e2.amount = 120;
 
-        list.add(e1);
-        list.add(e2);
+        expenses.add(e1);
+        expenses.add(e2);
+    }
 
-        return list;
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello Duygu";
+    }
+
+    @GetMapping("/expense")
+    public Expense getExpense() {
+        return expenses.get(0);
+    }
+
+    @GetMapping("/expenses")
+    public List<Expense> getExpenses() {
+        return expenses;
     }
 
     @PostMapping("/expense")
     public Expense createExpense(@RequestBody Expense expense) {
         expense.id = nextId;
         nextId = nextId + 1;
+        expenses.add(expense);
         return expense;
     }
 }
