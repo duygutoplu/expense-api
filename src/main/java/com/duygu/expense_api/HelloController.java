@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,5 +51,16 @@ public class HelloController {
         nextId = nextId + 1;
         expenses.add(expense);
         return expense;
+    }
+
+    @DeleteMapping("/expense/{id}")
+    public String deleteExpense(@PathVariable int id) {
+        for (int i = 0; i < expenses.size(); i++) {
+            if (expenses.get(i).id == id) {
+                expenses.remove(i);
+                return "{\"message\": \"Expense deleted\"}";
+            }
+        }
+        return "{\"message\": \"Expense not found\"}";
     }
 }
